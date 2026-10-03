@@ -1,0 +1,232 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=0.85in]{geometry}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=black,
+  urlcolor=blue!50!black
+}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small EDXSO Assignment 3}
+\fancyhead[R]{\small Interview Accelerator — Demo Script}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{0.6em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{0.5em}{}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+
+\newcommand{\sayline}[1]{\textbf{Bol:} ``#1''}
+\newcommand{\dikha}[1]{\textbf{Dikha:} #1}
+\newcommand{\click}[1]{\textbf{Click:} \texttt{#1}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries Interview Accelerator --- Demo Video Script}\\[0.35em]
+  {\large EDXSO AI Product Engineer Intern · Assignment 3}\\[0.6em]
+  {\normalsize Target length: \textbf{100--110 seconds} · Browser: \textbf{Chrome} · Mode: screen + mic}
+\end{center}
+
+\vspace{0.4em}
+\noindent
+\textbf{Live:} \url{https://edxso-interview-accelerator.vercel.app}\\
+\textbf{GitHub:} \url{https://github.com/nishant-uxs/edxso-interview-accelerator}
+
+\vspace{0.3em}
+\hrule
+\vspace{0.6em}
+
+\section*{0. Shoot se pehle (30 sec setup --- record mat karna)}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.2em]
+  \item Chrome open karo; mic + camera permission allow.
+  \item JD text ready (paste); resume PDF ready (\texttt{Nishantag\_Resume.pdf}).
+  \item Quiet room; 1080p screen record (Win+G / OBS / Loom).
+  \item Tab pe sirf live app; bookmarks bar hide (F11 optional).
+\end{itemize}
+
+\section*{1. Shot-by-shot script (time · bol · dikha)}
+
+\renewcommand{\arraystretch}{1.35}
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}p{6.6cm}>{\raggedright\arraybackslash}p{6.2cm}@{}}
+\toprule
+\textbf{Time} & \textbf{Bol (VO / live)} & \textbf{Screen pe kya dikhana / karna} \\
+\midrule
+\endfirsthead
+\toprule
+\textbf{Time} & \textbf{Bol (VO / live)} & \textbf{Screen pe kya dikhana / karna} \\
+\midrule
+\endhead
+
+\textbf{0:00--0:12}
+&
+\sayline{This is Interview Accelerator --- EDXSO Assignment 3. Stack: Next.js App Router, TypeScript, Tailwind, deployed on Vercel. LLM is Gemini via the OpenAI-compatible API.}
+&
+\dikha{Home / Input screen.}\\
+& & Top title + GitHub link 1 sec highlight.\\
+& & Cursor slow, no rush.\\
+\midrule
+
+\textbf{0:12--0:24}
+&
+\sayline{Input accepts paste or file upload. PDFs go through unpdf on the server, DOCX through Mammoth, then we clip and send JD plus resume to slash api slash analyze.}
+&
+JD textarea mein paste.\\
+Resume pe PDF choose (file name dikhe).\\
+\click{Start Analysis}\\
+``Analysing\ldots'' dikhne do.\\
+\midrule
+
+\textbf{0:24--0:36}
+&
+\sayline{Analyze returns structured JSON --- role breakdown, candidate strengths and gaps, claims to probe, and a job-fit score. That is Step 1 and 2 of the product.}
+&
+\textbf{Role} screen.\\
+Scroll: Required skills, Preferred, Technical + Behavioural competencies, Responsibilities.\\
+\click{See candidate fit}\\
+\midrule
+
+\textbf{0:36--0:50}
+&
+\sayline{Interview is not a fixed question bank. Slash api slash interview slash next takes analysis, transcript history, and the last answer, then generates the next question for screening, competency, and deep-dive.}
+&
+\textbf{Fit} screen: big \% score, Strong / Partial / Missing, Claims to probe.\\
+Cursor se score + missing gaps pe light hover.\\
+\click{Start AI voice interview}\\
+\midrule
+
+\textbf{0:50--1:05}
+&
+\sayline{Voice loop is browser-native: speechSynthesis for TTS questions, Web Speech API for STT answers. Optional getUserMedia camera booth --- scoring stays answer-quality first.}
+&
+Interview screen: Level pill + Progress $x$/9.\\
+AI question TTS se sunne do (1--2 sec).\\
+\click{Speak answer} --- 20--25 sec clear answer.\\
+Transcript side update dikha.\\
+\midrule
+
+\textbf{1:05--1:18}
+&
+\sayline{Questions are personalised to my resume. The next question reacts to my previous answer across three levels.}
+&
+Second question aane do (adaptive follow-up).\\
+Ek aur short voice / typed answer.\\
+Optional: \click{Enable video} 2 sec --- camera booth.\\
+\click{End \& evaluate}\\
+\midrule
+
+\textbf{1:18--1:32}
+&
+\sayline{After the session, slash api slash interview slash evaluate scores overall plus seven competencies, question-level feedback, prep gaps, and readiness.}
+&
+\textbf{Report} screen.\\
+Overall score + readiness pill.\\
+Competency cards scroll.\\
+Strengths / Weaknesses.\\
+One Preparation gap open.\\
+One Question-level feedback block.\\
+\midrule
+
+\textbf{1:32--1:42}
+&
+\sayline{You can export a shareable PDF report with jsPDF --- scores, gaps, and per-question feedback.}
+&
+\click{Download report PDF}\\
+Downloads bar / file name 1--2 sec dikha.\\
+\midrule
+
+\textbf{1:42--1:50}
+&
+\sayline{Architecture is three API routes plus a thin client: analyze, adaptive next-question, evaluate. Live on Vercel, source on GitHub. Full flow: ingest, fit, adaptive voice interview, report. Thanks.}
+&
+URL address bar dikha.\\
+GitHub link pe last hover.\\
+Freeze 1 sec --- end.
+\\
+\bottomrule
+\end{longtable}
+
+\section*{2. Continuous VO (copy-paste teleprompter)}
+
+\begin{quote}
+\small
+This is Interview Accelerator --- EDXSO Assignment 3. Stack: Next.js App Router, TypeScript, Tailwind, deployed on Vercel. LLM is Gemini via the OpenAI-compatible API.
+
+Input accepts paste or file upload. PDFs go through unpdf on the server, DOCX through Mammoth, then we clip and send JD plus resume to \texttt{/api/analyze}.
+
+Analyze returns structured JSON --- role breakdown, candidate strengths and gaps, claims to probe, and a job-fit score. That is Step~1 and~2 of the product.
+
+Interview is not a fixed question bank. \texttt{/api/interview/next} takes analysis, transcript history, and the last answer, then generates the next question for screening, competency, and deep-dive.
+
+Voice loop is browser-native: \texttt{speechSynthesis} for TTS questions, Web Speech API for STT answers. Optional \texttt{getUserMedia} camera booth --- scoring stays answer-quality first.
+
+Questions are personalised to my resume. The next question reacts to my previous answer across three levels.
+
+After the session, \texttt{/api/interview/evaluate} scores overall plus seven competencies, question-level feedback, prep gaps, and readiness.
+
+You can export a shareable PDF report with jsPDF --- scores, gaps, and per-question feedback.
+
+Architecture is three API routes plus a thin client: analyze, adaptive next-question, evaluate. Live on Vercel, source on GitHub. Full flow: ingest, fit, adaptive voice interview, report. Thanks.
+\end{quote}
+
+\section*{3. Tech callouts (on-screen captions --- optional)}
+\begin{center}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{When} & \textbf{Caption text} \\
+\midrule
+0:00 & Next.js + TypeScript + Tailwind · Vercel \\
+0:12 & unpdf / Mammoth $\rightarrow$ \texttt{/api/analyze} \\
+0:36 & Gemini · adaptive \texttt{/api/interview/next} \\
+0:50 & Web Speech STT/TTS · getUserMedia \\
+1:18 & \texttt{/api/interview/evaluate} \\
+1:32 & jsPDF report export \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section*{4. Sample answers (mic pe bolne ke liye)}
+\subsection*{Answer 1 (EDXSO / LLM)}
+``I built EDXSO influencer outreach to personalise messages with an LLM. I used retrieval over influencer profiles, crafted prompts for tone matching, and exposed a FastAPI endpoint so the team could generate drafts faster without losing quality.''
+
+\subsection*{Answer 2 (RAG follow-up)}
+``For the RAG prototype I chunked profiles, embedded them, retrieved top-k context, then prompted the model. For a demo I used an in-memory store; production mein main vector DB, evaluation labels, aur campaign-specific templates add karta.''
+
+\section*{5. Checklist before upload}
+\begin{itemize}[leftmargin=1.2em,itemsep=0.15em]
+  \item Full journey dikhta hai: Input $\rightarrow$ Role $\rightarrow$ Fit $\rightarrow$ Interview $\rightarrow$ Report $\rightarrow$ PDF
+  \item Kam se kam \textbf{1 voice answer} clear sunaai de
+  \item Adaptive next question visually clear ho
+  \item Live URL + GitHub frame mein aaye
+  \item Video 2 min se kam; noise / tab switching nahi
+  \item Upload: YouTube unlisted ya Drive link (anyone with link)
+\end{itemize}
+
+\section*{6. Submission pack}
+\begin{enumerate}[leftmargin=1.2em,itemsep=0.15em]
+  \item Live app URL
+  \item GitHub repo
+  \item README (architecture + voice + evaluation)
+  \item This demo video
+  \item (Optional) Downloaded sample report PDF attach
+\end{enumerate}
+
+\vspace{1em}
+\begin{center}
+\textit{Director's note: ek clean take. Galati ho to dubara start --- cut mat jodna zyada.}
+\end{center}
+
+\end{document}

@@ -5,7 +5,18 @@ AI-powered **Interview Accelerator** that turns a Job Description + Resume into 
 Inspired by the candidate problem space around [Student Credibility](https://studentcredibility.com): students often have a resume and JD, but not a clear sense of fit, likely questions, or readiness.
 
 **Live app:** https://edxso-interview-accelerator.vercel.app  
-**Repo:** https://github.com/nishant-uxs/edxso-interview-accelerator
+**Repo:** https://github.com/nishant-uxs/edxso-interview-accelerator  
+**Demo video:** https://www.loom.com/share/2ee7affcbc1a4c3fadba26bd1733758e
+
+### Demo video note
+
+Loom’s free plan caps a single recording at **5 minutes**, so this capture ends mid-interview before the full **Report + Download report PDF** segment.  
+
+The complete journey is available on the live app:
+
+**Input → Role → Fit → adaptive voice interview (3 levels) → evaluation report → PDF export**
+
+Please continue the remaining steps on: https://edxso-interview-accelerator.vercel.app
 
 ## Product flow
 
@@ -119,6 +130,7 @@ flowchart TB
 | Download report PDF | Yes (jsPDF) |
 | Web UI | Yes |
 | Video | Bonus camera booth |
+| Demo video | [Loom](https://www.loom.com/share/2ee7affcbc1a4c3fadba26bd1733758e) (5‑min cap note above) |
 | Live deploy | Vercel |
 
 ## License

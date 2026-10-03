@@ -4,7 +4,7 @@ AI-powered **Interview Accelerator** that turns a Job Description + Resume into 
 
 Inspired by the candidate problem space around [Student Credibility](https://studentcredibility.com): students often have a resume and JD, but not a clear sense of fit, likely questions, or readiness.
 
-**Live app:** *(populated after Vercel deploy)*  
+**Live app:** https://edxso-interview-accelerator.vercel.app  
 **Repo:** https://github.com/nishant-uxs/edxso-interview-accelerator
 
 ## Product flow

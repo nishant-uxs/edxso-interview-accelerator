@@ -10,6 +10,7 @@ import type {
   NextQuestionResponse,
   Readiness,
 } from "@/lib/types";
+import { downloadInterviewReportPdf } from "@/lib/report-pdf";
 import { analyzeSpeechMeta, getRecognition, speak, stopSpeaking } from "@/lib/voice";
 
 type Step = 0 | 1 | 2 | 3 | 4;
@@ -519,6 +520,12 @@ export default function Home() {
           </Card>
 
           <div className="flex flex-wrap justify-end gap-2">
+            <Button
+              variant="ghost"
+              onClick={() => downloadInterviewReportPdf(report, analysis)}
+            >
+              Download report PDF
+            </Button>
             <Button variant="ghost" onClick={() => { setStep(0); setReport(null); setTurns([]); }}>New session</Button>
             <Button onClick={startInterview} disabled={busy}>Retry interview</Button>
           </div>

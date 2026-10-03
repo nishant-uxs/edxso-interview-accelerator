@@ -51,7 +51,8 @@ Chrome/Edge recommended for voice.
 - **Next.js (App Router) + TypeScript + Tailwind**  
 - **API routes:** `/api/analyze`, `/api/interview/next`, `/api/interview/evaluate`  
 - **LLM:** Gemini Flash family (free-tier friendly, model rotation)  
-- **Files:** `pdf-parse`, `mammoth`  
+- **Files:** `unpdf`, `mammoth`  
+- **Report PDF:** `jspdf` (client download)  
 - **Deploy:** Vercel  
 
 ## Quick start
@@ -102,6 +103,7 @@ flowchart TB
 3. Start interview — allow mic; answer 2–3 questions by voice  
 4. Toggle camera once (bonus)  
 5. Finish → show report + prep gaps + readiness  
+6. **Download report PDF** (shareable performance pack)
 
 ## Assignment mapping
 
@@ -114,6 +116,7 @@ flowchart TB
 | Dynamic follow-ups | Yes |
 | Voice interview | Yes (Web Speech) |
 | Evaluation + readiness | Yes |
+| Download report PDF | Yes (jsPDF) |
 | Web UI | Yes |
 | Video | Bonus camera booth |
 | Live deploy | Vercel |

@@ -3,11 +3,12 @@ export async function extractTextFromFile(file: File): Promise<string> {
   const buf = Buffer.from(await file.arrayBuffer());
 
   if (name.endsWith(".pdf") || file.type === "application/pdf") {
-    // dynamic import keeps build happy
-    const pdf = await import("pdf-parse");
-    const parse = (pdf as unknown as { default: (b: Buffer) => Promise<{ text: string }> }).default;
-    const out = await parse(buf);
-    return (out.text || "").trim();
+    // unpdf works in Node/Vercel without browser DOMMatrix globals
+    const { extractText } = await import("unpdf");
+    const data = new Uint8Array(buf);
+    const { text } = await extractText(data, { mergePages: true });
+    const joined = Array.isArray(text) ? text.join("\n") : String(text || "");
+    return joined.trim();
   }
 
   if (

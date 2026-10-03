@@ -1,17 +1,24 @@
 import OpenAI from "openai";
 
+function env(name: string, fallback = ""): string {
+  return (process.env[name] || fallback).replace(/\\r\\n/g, "").replace(/[\r\n]+/g, "").trim();
+}
+
 function client() {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = env("OPENAI_API_KEY");
   if (!apiKey) throw new Error("OPENAI_API_KEY is not set");
   return new OpenAI({
     apiKey,
-    baseURL: process.env.OPENAI_BASE_URL || "https://generativelanguage.googleapis.com/v1beta/openai/",
+    baseURL: env(
+      "OPENAI_BASE_URL",
+      "https://generativelanguage.googleapis.com/v1beta/openai/",
+    ),
   });
 }
 
 function models(): string[] {
-  const primary = process.env.OPENAI_MODEL || "gemini-flash-lite-latest";
-  const fallbacks = (process.env.OPENAI_FALLBACK_MODELS || "")
+  const primary = env("OPENAI_MODEL", "gemini-flash-lite-latest");
+  const fallbacks = env("OPENAI_FALLBACK_MODELS")
     .split(",")
     .map((s) => s.trim())
     .filter(Boolean);

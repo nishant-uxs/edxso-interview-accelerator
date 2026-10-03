@@ -1,21 +1,41 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #12171c;
+  --muted: #5b6670;
+  --paper: #f4f1ea;
+  --card: #fffdf8;
+  --line: #ddd6c8;
+  --accent: #0c6b58;
+  --accent-2: #c45c26;
+  --warn: #b45309;
+  --bad: #9f1239;
+  --good: #0c6b58;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  min-height: 100%;
+  color: var(--ink);
+  background:
+    radial-gradient(900px 420px at 85% -10%, #d9ebe4 0%, transparent 55%),
+    radial-gradient(700px 380px at 0% 20%, #f0e2d4 0%, transparent 50%),
+    linear-gradient(180deg, #efebe3 0%, var(--paper) 45%);
+  font-family: "DM Sans", system-ui, sans-serif;
 }
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+h1, h2, h3, .display {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
 }
+button:disabled { opacity: 0.55; cursor: not-allowed; }
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(12,107,88,0.35); }
+  70% { box-shadow: 0 0 0 14px rgba(12,107,88,0); }
+  100% { box-shadow: 0 0 0 0 rgba(12,107,88,0); }
+}
+.listening { animation: pulse-ring 1.4s infinite; }

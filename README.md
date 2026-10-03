@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# EDXSO Assignment 3 — Interview Accelerator
 
-## Getting Started
+AI-powered **Interview Accelerator** that turns a Job Description + Resume into a personalised, adaptive **voice interview** and readiness report.
 
-First, run the development server:
+Inspired by the candidate problem space around [Student Credibility](https://studentcredibility.com): students often have a resume and JD, but not a clear sense of fit, likely questions, or readiness.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Live app:** *(populated after Vercel deploy)*  
+**Repo:** https://github.com/nishant-uxs/edxso-interview-accelerator
+
+## Product flow
+
+```mermaid
+flowchart LR
+  A[Upload / paste JD + Resume] --> B[Role analysis]
+  B --> C[Candidate analysis + Job Fit]
+  C --> D[Level 1 Screening]
+  D --> E[Level 2 Competency]
+  E --> F[Level 3 Deep-Dive]
+  F --> G[Voice STT/TTS loop]
+  G --> H[Performance report + readiness]
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Input** — paste or upload JD + resume (txt / pdf / docx)  
+2. **Understand the role** — title, skills, competencies, keywords  
+3. **Understand the candidate** — strengths, gaps, claims to probe, job-fit %  
+4. **AI interview (3 levels)** — screening → competency → deep-dive  
+5. **Voice** — AI speaks questions (TTS); candidate answers by voice (STT) or text  
+6. **Video (bonus)** — optional camera booth  
+7. **Report** — overall score, competencies, question feedback, prep gaps, readiness  
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adaptive interview intelligence
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Questions are generated from **this JD + this resume + prior answers** (not a fixed bank).  
+- Deep-dive challenges metrics, tradeoffs, and vague answers.  
+- Difficulty shifts harder/easier based on the last response.  
+- Context retained: role needs, claims, strengths/weaknesses, topics covered.  
 
-## Learn More
+## Voice implementation
 
-To learn more about Next.js, take a look at the following resources:
+| Piece | Implementation |
+|-------|----------------|
+| Speech-to-text | Browser **Web Speech API** (`SpeechRecognition` / `webkitSpeechRecognition`) |
+| Text-to-speech | Browser **speechSynthesis** (AI interviewer voice) |
+| LLM | Gemini via OpenAI-compatible API (`OPENAI_BASE_URL`) |
+| Video (bonus) | `getUserMedia` camera preview — evaluation still answer-quality first |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Chrome/Edge recommended for voice.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Stack
 
-## Deploy on Vercel
+- **Next.js (App Router) + TypeScript + Tailwind**  
+- **API routes:** `/api/analyze`, `/api/interview/next`, `/api/interview/evaluate`  
+- **LLM:** Gemini Flash family (free-tier friendly, model rotation)  
+- **Files:** `pdf-parse`, `mammoth`  
+- **Deploy:** Vercel  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Quick start
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+cp .env.example .env.local
+# set OPENAI_API_KEY + OPENAI_BASE_URL (Gemini OpenAI-compat)
+
+npm run dev
+# http://localhost:3000
+```
+
+### Environment
+
+```bash
+OPENAI_API_KEY=...
+OPENAI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
+OPENAI_MODEL=gemini-flash-lite-latest
+OPENAI_FALLBACK_MODELS=gemini-2.0-flash,gemini-flash-lite-latest
+```
+
+## Architecture
+
+```mermaid
+flowchart TB
+  UI[Next.js UI] --> A[/api/analyze]
+  UI --> N[/api/interview/next]
+  UI --> E[/api/interview/evaluate]
+  A --> LLM[Gemini OpenAI-compat]
+  N --> LLM
+  E --> LLM
+  UI --> STT[Web Speech STT]
+  UI --> TTS[speechSynthesis TTS]
+  UI --> CAM[getUserMedia video]
+```
+
+### Evaluation methodology
+
+- Competency scores: role fit, technical knowledge, problem solving, communication, confidence, depth, behavioural fit  
+- Question-level: assessment, what was good, what could be better, ideal direction  
+- Readiness: `not_ready` → `needs_preparation` → `interview_ready` → `strong_candidate` from interview + JD alignment  
+
+## Demo script (for video)
+
+1. Paste a real JD + your resume  
+2. Walk Role → Fit screens  
+3. Start interview — allow mic; answer 2–3 questions by voice  
+4. Toggle camera once (bonus)  
+5. Finish → show report + prep gaps + readiness  
+
+## Assignment mapping
+
+| Requirement | Status |
+|-------------|--------|
+| JD + resume input/upload | Yes |
+| Role + candidate analysis | Yes |
+| Job fit score | Yes |
+| 3 interview levels | Yes |
+| Dynamic follow-ups | Yes |
+| Voice interview | Yes (Web Speech) |
+| Evaluation + readiness | Yes |
+| Web UI | Yes |
+| Video | Bonus camera booth |
+| Live deploy | Vercel |
+
+## License
+
+MIT — EDXSO AI Product Engineer Intern Assignment 3.

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local smoke / agent noise
+analyze-out.json
+jd.txt
+resume.txt
+AGENTS.md
+CLAUDE.md
